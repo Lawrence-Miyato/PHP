@@ -1,4 +1,5 @@
 <?php
+session_start();
 // Khởi tạo biến $success rỗng
 $success = "";
 
@@ -9,8 +10,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
 
     // Thông tin đăng nhập cố định
-    $correctUsername = 'HuynhNgocBao';
+    $correctUsername = 'NgocBao2806';
     $correctPassword = '123';
+
+    // Lưu thông tin đăng nhập vào session
+    $_SESSION['username'] = $username;
+
 
     // Kiểm tra thông tin đăng nhập
     if ($username === $correctUsername && $password === $correctPassword) {

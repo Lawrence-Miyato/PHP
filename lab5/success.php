@@ -1,6 +1,12 @@
 <?php
 session_start();
 
+// Kiểm tra xem người dùng đã đăng nhập chưa
+if (isset($_SESSION['username'])) {
+    echo "<h2>Xin chào, " . $_SESSION['username'] . "</h2>";
+}
+
+
 // Khởi tạo dữ liệu người dùng trong session nếu chưa có
 if (!isset($_SESSION['users'])) {
     $_SESSION['users'] = [
@@ -106,7 +112,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit'])) {
 
 <body>
     <h1>Quản lý người dùng</h1>
-
     <!-- Form thêm người dùng -->
     <form action="success.php" method="POST">
         <input type="text" name="fullname" placeholder="Fullname" required>
