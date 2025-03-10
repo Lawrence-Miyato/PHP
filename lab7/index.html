@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Nhân Viên</title>
+    <link rel="stylesheet" href="index.css">
+    <script>
+        function calculateSalary() {
+            const formData = new FormData(document.querySelector('form'));
+            fetch('Wage.php', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('salary').value = data.salary;
+                    document.getElementById('allowance').value = data.allowance;
+                    document.getElementById('net_salary').value = data.net_salary;
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">QUẢN LÝ NHÂN VIÊN</div>
+        <form>
+            <div class="row">
+                <label for="name">Họ và tên:</label>
+                <input type="text" id="name" name="name">
+                <label for="children">Số con:</label>
+                <input type="number" id="children" name="children">
+            </div>
+            <div class="row">
+                <label for="dob">Ngày sinh:</label>
+                <input type="date" id="dob" name="dob">
+                <label for="start_date">Ngày vào làm:</label>
+                <input type="date" id="start_date" name="start_date">
+            </div>
+            <div class="row">
+                <label>Giới tính:</label>
+                <div class="radio-group">
+                    <input type="radio" id="male" name="gender" value="male">
+                    <label for="male">Nam</label>
+                    <input type="radio" id="female" name="gender" value="female">
+                    <label for="female">Nữ</label>
+                </div>
+            </div>
+            <div class="row">
+                <label>Loại nhân viên:</label>
+                <div class="radio-group">
+                    <input type="radio" id="office" name="employee_type" value="office">
+                    <label for="office">Văn phòng</label>
+                    <input type="radio" id="production" name="employee_type" value="production">
+                    <label for="production">Sản Xuất</label>
+                </div>
+            </div>
+            <div class="row">
+                <label for="salary_scale">Hệ số lương:</label>
+                <select id="salary_scale" name="salary_scale">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+            <div class="row">
+                <label for="absent_days">Số ngày vắng:</label>
+                <input type="number" id="absent_days" name="absent_days">
+                <label for="products">Số sản phẩm:</label>
+                <input type="number" id="products" name="products">
+            </div>
+            <div class="row">
+                <label>Tăng ca:</label>
+                <div class="checkbox-group">
+                    <input type="radio" id="overtime_yes" name="overtime" value="yes">
+                    <label for="overtime_yes">Có</label>
+                    <input type="radio" id="overtime_no" name="overtime" value="no">
+                    <label for="overtime_no">Không</label>
+                </div>
+            </div>
+            <div class="row">
+                <label for="salary">Tiền lương:</label>
+                <input type="text" id="salary" name="salary" readonly>
+                <label for="allowance">Trợ cấp:</label>
+                <input type="text" id="allowance" name="allowance" readonly>
+            </div>
+            <div class="row">
+                <label for="net_salary">Thực lãnh:</label>
+                <input type="text" id="net_salary" name="net_salary" readonly>
+            </div>
+            <div class="button">
+                <input type="button" value="Tính lương" onclick="calculateSalary()">
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
