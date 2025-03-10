@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <h1>Phương trình bậc nhất và bậc hai</h1>
+        <form id="equationForm" action="solve.php" method="post">
+            <label for="a">Số a:</label>
+            <input type="number" id="a" name="a" required><br><br>
+            <label for="b">Số b:</label>
+            <input type="number" id="b" name="b" required><br><br>
+            <label for="c">Số c:</label>
+            <input type="number" id="c" name="c"><br><br>
+            <label for="equation">Loại phương trình:</label>
+            <select id="equation" name="equation">
+                <option value="linear">Phương trình bậc nhất</option>
+                <option value="quadratic">Phương trình bậc hai</option>
+            </select><br><br>
+            <input type="submit" value="Giải phương trình">
+        </form>
+    </div>
+    <script>
+        document.getElementById('equationForm').addEventListener('submit', function (event) {
+            var equationType = document.getElementById('equation').value;
+            if (equationType === 'linear') {
+                this.action = 'FirstOrderEquation.php';
+            } else {
+                this.action = 'SecondDegreeEquation.php';
+            }
+        });
+    </script>
+</body>
+
+</html>
