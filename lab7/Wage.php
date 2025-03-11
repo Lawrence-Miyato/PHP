@@ -11,35 +11,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $products = $_POST['products'];
     $overtime = $_POST['overtime'];
 
-    // Basic salary calculation
-    $base_salary = 3000000; // Base salary for scale 1
+
+    $base_salary = 3000000;
     $salary = $base_salary * $salary_scale;
 
-    // Deduct salary for absent days
-    $salary -= $absent_days * 100000; // Deduct 100,000 VND for each absent day
 
-    // Add bonus for production employees
+    $salary -= $absent_days * 100000;
+
+
     if ($employee_type == "production") {
-        $salary += $products * 5000; // Add 5,000 VND for each product
+        $salary += $products * 5000;
     }
 
-    // Add overtime bonus
+
     if ($overtime == "yes") {
-        $salary += 200000; // Add 200,000 VND for overtime
+        $salary += 200000;
     }
 
-    // Calculate allowance
-    $allowance = $children * 100000; // 100,000 VND allowance for each child
 
-    // Calculate net salary
+    $allowance = $children * 100000;
+
+
     $net_salary = $salary + $allowance;
 
-    // Format the results
+
     $formatted_salary = number_format($salary, 0, ',', '.');
     $formatted_allowance = number_format($allowance, 0, ',', '.');
     $formatted_net_salary = number_format($net_salary, 0, ',', '.');
 
-    // Return the results as JSON
+
     echo json_encode([
         'salary' => $formatted_salary,
         'allowance' => $formatted_allowance,
